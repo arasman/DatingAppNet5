@@ -7,8 +7,9 @@ import { AccountService } from '../_services/account.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {  
+export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
+  validationErrors: string[] = [];
   model: any = {};
 
   constructor(private accountService: AccountService,
@@ -22,7 +23,7 @@ export class RegisterComponent implements OnInit {
       this.cancel();
     }, error => {
       console.log(error);
-      this.toastr.error(error.error);
+      this.validationErrors = error;
     });
   }
   cancel(): void{
